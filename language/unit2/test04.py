@@ -9,5 +9,7 @@ for l in d1.items():
 for get in d1:
     print(get)
     print(d1[get])
+    # 遍历所有值
     print(d1.values())
+
 
