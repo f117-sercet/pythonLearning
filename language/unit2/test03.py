@@ -16,4 +16,4 @@ print(d1)
 
 # 利用 popitem() 进行删除
 k1, v1 = d1.popitem()
-print(k1,v1)
+print(k1, v1)
