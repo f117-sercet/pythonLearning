@@ -69,7 +69,7 @@ def findDis(pts1, pts2):
     return ((pts2[0] - pts1[0]) ** 2 + (pts2[1] - pts1[1]) ** 2) ** 0.5
 
 
-path = 'F:/Anaconda/images/2.jpg'
+path = 'F:/Anaconda/images/4.jpg'
 img = cv2.imread(path)
 img = cv2.resize(img, (0, 0), None, 0.18, 0.18)
 img, conts = getContours(img, minArea=8000, filter=4)
