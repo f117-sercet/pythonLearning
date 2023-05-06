@@ -1,5 +1,16 @@
+package com.recommender
+import java.net.InetAddress
+
+import com.mongodb.casbah.commons.MongoDBObject
+import com.mongodb.casbah.{MongoClient, MongoClientURI}
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest
+import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest
+import org.elasticsearch.common.settings.Settings
+import org.elasticsearch.common.transport.InetSocketTransportAddress
+import org.elasticsearch.transport.client.PreBuiltTransportClient
 
 /**
  * Movie 数据集
@@ -19,6 +30,7 @@ import org.apache.spark.sql.SparkSession
 case class Movie(mid: Int, name: String, descri: String, timelong: String, issue: String,
                  shoot: String, language: String, genres: String, actors: String, directors: String)
 
+
 /**
  * Rating数据集
  *
@@ -26,12 +38,14 @@ case class Movie(mid: Int, name: String, descri: String, timelong: String, issue
  */
 case class Rating(uid: Int, mid: Int, score: Double, timestamp: Int )
 
+
 /**
  * Tag数据集
  *
  * 15,1955,dentist,1193435061
  */
 case class Tag(uid: Int, mid: Int, tag: String, timestamp: Int)
+
 
 // 把mongo和es的配置封装成样例类
 
@@ -52,6 +66,7 @@ case class MongoConfig(uri:String, db:String)
 case class ESConfig(httpHosts:String, transportHosts:String, index:String, clustername:String)
 
 object DataLoader{
+  // 定义常量
   val MOVIE_DATA_PATH = "F:\\git\\Repository\\gitHub\\pythonLearning\\recommendSystem\\MovieRecommendSystem\\recommender\\DataLoader\\src\\main\\resources\\movies.csv"
   val RATING_DATA_PATH = "F:\\git\\Repository\\gitHub\\pythonLearning\\recommendSystem\\MovieRecommendSystem\\recommender\\DataLoader\\src\\main\\resources\\ratings.csv"
   val TAG_DATA_PATH = "F:\\git\\Repository\\gitHub\\pythonLearning\\recommendSystem\\MovieRecommendSystem\\recommender\\DataLoader\\src\\main\\resources\\tags.csv"
@@ -61,8 +76,10 @@ object DataLoader{
   val MONGODB_TAG_COLLECTION = "Tag"
   val ES_MOVIE_INDEX = "Movie"
 
+
+
   def main(args: Array[String]): Unit = {
-    val config  = Map(
+    val config = Map(
       "spark.cores" -> "local[*]",
       "mongo.uri" -> "mongodb://localhost:27017/recommender",
       "mongo.db" -> "recommender",
@@ -71,9 +88,8 @@ object DataLoader{
       "es.index" -> "recommender",
       "es.cluster.name" -> "elasticsearch"
     )
-
-      // 创建一个sparkConf
-     val  sparkConf = new SparkConf().setMaster(config("spark.cores")).setAppName("DataLoader")
+    // 创建一个sparkConf
+    val sparkConf = new SparkConf().setMaster(config("spark.cores")).setAppName("DataLoader")
 
     // 创建一个SparkSession
     val spark = SparkSession.builder().config(sparkConf).getOrCreate()
@@ -89,6 +105,34 @@ object DataLoader{
         Movie(attr(0).toInt, attr(1).trim, attr(2).trim, attr(3).trim, attr(4).trim, attr(5).trim, attr(6).trim, attr(7).trim, attr(8).trim, attr(9).trim)
       }
     ).toDF()
+
     val ratingRDD = spark.sparkContext.textFile(RATING_DATA_PATH)
+
+    val ratingDF = ratingRDD.map(item => {
+      val attr = item.split(",")
+      Rating(attr(0).toInt, attr(1).toInt, attr(2).toDouble, attr(3).toInt)
+    }).toDF()
+
+    val tagRDD = spark.sparkContext.textFile(TAG_DATA_PATH)
+    //将tagRDD装换为DataFrame
+    val tagDF = tagRDD.map(item => {
+      val attr = item.split(",")
+      Tag(attr(0).toInt, attr(1).toInt, attr(2).trim, attr(3).toInt)
+    }).toDF()
+    implicit val mongoConfig = MongoConfig(config("mongo.uri"), config("mongo.db"))
+
+    // 将数据保存到MongoDB中
+    storeDataInMongoDB(movieDF,ratingDF,tagDF)
+
+    // 数据预处理，把movie对应的tag信息添加进去，加一列tag1|tag2|tag3
+    import org.apache.spark.sql.functions._
+
+
+    def storeDataInMongoDB(movieDF: DataFrame, ratingDF: DataFrame, tagDF: DataFrame)(implicit mongoConfig: MongoConfig): Unit ={
+
+      // 新建一个mongodb的连接
+      val mongoClient = MongoClient(MongoClientURI(mongoConfig.uri))
+    }
+
   }
 }
