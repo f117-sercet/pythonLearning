@@ -78,6 +78,7 @@ object DataLoader{
 
 
 
+
   def main(args: Array[String]): Unit = {
     val config = Map(
       "spark.cores" -> "local[*]",
@@ -127,12 +128,28 @@ object DataLoader{
     // 数据预处理，把movie对应的tag信息添加进去，加一列tag1|tag2|tag3
     import org.apache.spark.sql.functions._
 
+    val newTag = tagDF.groupBy($"mid").agg(concat_ws("|", collect_set($"tag")).as("tags"))
+      .select("mid", "tags")
+
+    // newTag 和movie 做join，数据合并在一起，左外连接
+    val movieWithTagDF = movieDF.join(newTag, Seq("mid"), "left")
+    implicit val esConfig = ESConfig(config("es.httpHosts"), config("es.transportHosts"), config("es.index"), config("es.cluster.name"))
+
+    //保存数据到ES
+    storeDataInES(movieWithTagDF)
+    spark.stop()
+
+
 
     def storeDataInMongoDB(movieDF: DataFrame, ratingDF: DataFrame, tagDF: DataFrame)(implicit mongoConfig: MongoConfig): Unit ={
 
       // 新建一个mongodb的连接
       val mongoClient = MongoClient(MongoClientURI(mongoConfig.uri))
+
+      // 若MongoDB中已经有相应的数据库，先删除
+      mongoClient(mongoConfig.db)(MONGODB_MOVIE_COLLECTION).dropCollection()
     }
+    def storeDataInES(movieWithTagDF: DataFrame) = ???
 
   }
 }
