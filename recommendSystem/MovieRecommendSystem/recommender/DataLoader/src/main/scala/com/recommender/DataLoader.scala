@@ -148,6 +148,28 @@ object DataLoader{
 
       // 若MongoDB中已经有相应的数据库，先删除
       mongoClient(mongoConfig.db)(MONGODB_MOVIE_COLLECTION).dropCollection()
+      mongoClient(mongoConfig.db)(MONGODB_RATING_COLLECTION).dropCollection()
+      mongoClient(mongoConfig.db)(MONGODB_TAG_COLLECTION).dropCollection()
+
+
+      // 将DF数据导入对应的mongodb表中
+      movieDF.write
+        .option("uri",mongoConfig.uri)
+        .option("collection",MONGODB_MOVIE_COLLECTION)
+        .mode("overwrite")
+        .format("com.mongodb.spark.sql")
+        .save()
+
+      ratingDF.write
+        .option("url",mongoConfig.uri)
+        .option("collection",MONGODB_RATING_COLLECTION)
+        .mode("overwrite")
+        .format("com.mongodb.spark.sql")
+        .save()
+
+      tagDF.write
+        .option("uri",mongoConfig.uri)
+
     }
     def storeDataInES(movieWithTagDF: DataFrame) = ???
 
