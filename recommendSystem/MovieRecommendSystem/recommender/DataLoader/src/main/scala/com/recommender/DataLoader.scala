@@ -169,9 +169,48 @@ object DataLoader{
 
       tagDF.write
         .option("uri",mongoConfig.uri)
+        .option("collection",MONGODB_TAG_COLLECTION)
+        .mode("overwrite")
+        .format("com.mongodb.spark.sql")
+        .save()
+
+      //对数据表建索引
+      mongoClient(mongoConfig.db)(MONGODB_MOVIE_COLLECTION).createIndex(MongoDBObject("mid" -> 1))
+      mongoClient(mongoConfig.db)(MONGODB_RATING_COLLECTION).createIndex(MongoDBObject("uid" -> 1))
+      mongoClient(mongoConfig.db)(MONGODB_RATING_COLLECTION).createIndex(MongoDBObject("mid" -> 1))
+      mongoClient(mongoConfig.db)(MONGODB_TAG_COLLECTION).createIndex(MongoDBObject("uid" -> 1))
+      mongoClient(mongoConfig.db)(MONGODB_TAG_COLLECTION).createIndex(MongoDBObject("mid" -> 1))
+
+      mongoClient.close()
+
 
     }
-    def storeDataInES(movieWithTagDF: DataFrame) = ???
+
+    def storeDataInES(movieDF: DataFrame)(implicit eSConfig: ESConfig): Unit ={
+      // 新建es配置
+      val settings = Settings.builder().put("cluster.name", eSConfig.clustername).build()
+
+      // 新建一个es客户端
+
+      val esClient = new PreBuiltTransportClient(settings)
+
+      val REGEX_HOST_PORT = "(.+):(\\d+)".r
+      eSConfig.transportHosts.split(",").foreach {
+        case REGEX_HOST_PORT(host: String, port: String) => {
+          esClient.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(host), port.toInt))
+        }
+      }
+
+      // 先清理遗留的数据
+      if( esClient.admin().indices().exists( new IndicesExistsRequest(eSConfig.index) )
+        .actionGet()
+        .isExists
+      ){
+        esClient.admin().indices().delete(new DeleteIndexRequest(eSConfig.index))
+      }
+      esClient.admin().indices().create( new CreateIndexRequest(eSConfig.index) )
+
+    }
 
   }
 }
