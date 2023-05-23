@@ -210,6 +210,15 @@ object DataLoader{
       }
       esClient.admin().indices().create( new CreateIndexRequest(eSConfig.index) )
 
+      movieDF.write
+        .option("es.nodes", eSConfig.httpHosts)
+        .option("es.http.timeout", "100m")
+        .option("es.mapping.id", "mid")
+        .mode("overwrite")
+        .format("org.elasticsearch.spark.sql")
+        .save(eSConfig.index + "/" + ES_MOVIE_INDEX)
+
+
     }
 
   }
