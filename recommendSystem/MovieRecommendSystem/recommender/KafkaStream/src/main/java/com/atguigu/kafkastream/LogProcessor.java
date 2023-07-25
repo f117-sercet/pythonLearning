@@ -3,6 +3,8 @@ package com.atguigu.kafkastream;
 import org.apache.kafka.streams.processor.Processor;
 import org.apache.kafka.streams.processor.ProcessorContext;
 
+import java.sql.SQLOutput;
+
 /**
  * Description： TODO
  *
@@ -19,7 +21,16 @@ public class LogProcessor implements Processor<byte[], byte[]> {
     }
 
     @Override
-    public void process(byte[] bytes, byte[] bytes2) {
+    public void process(byte[] dummy, byte[] line) {
+
+        // 把收集到的日志信息用string表述
+        String input = new String(line);
+        if (input.contains("MOVIE_RATTING_PREFIX:")){
+            System.out.println("movie ratting data coming!>>>>>>>>>>"+input);
+            input = input.split("MOVIE_RATING_PREFIX:")[1].trim();
+            context.forward( "logProcessor".getBytes(), input.getBytes() );
+        }
+
 
     }
 
