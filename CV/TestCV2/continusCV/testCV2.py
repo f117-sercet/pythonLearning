@@ -38,7 +38,7 @@ while True:
                 cv2.arrowedLine(imgContours2, (nPoints[0][0][0], nPoints[0][0][1]),
                                 (nPoints[1][0][0], nPoints[1][0][1]),
                                 (255, 0, 255), 3, 8, 0, 0.05)
-                cv2.arrowedLine(imgContours2, (nPoints[0][0][0], nPoints[0][0][1]),
+                cv2.arrowedLine(imgContours2, (nPoints[0][0][0], nPoints[0][0][1 ]),
                                 (nPoints[2][0][0], nPoints[2][0][1]),
                                 (255, 0, 255), 3, 8, 0, 0.05)
                 x, y, w, h = obj[3]
