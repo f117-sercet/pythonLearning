@@ -14,16 +14,33 @@ print(sheet.dimensions)
 
 ## 获取相对应的列名
 
-dataColumn={}
+dataColumns={}
+for i in sheet.iter_rows(min_row=1,max_row=1,min_col=2):
+    for j in i:
+        dataColumn={}
+        #dataColumn.update(j.value,j.value)
+        dataColumn[j.value]=j.value
+        dataColumns.update(dataColumn)
+
+print(dataColumns)
+print(dataColumns.__getitem__('FK_MDNB_MATCHING_CODE'))
 
 ## 获取指定的列的数据
+
+maxColumn = sheet.max_row
+for i in sheet.iter_rows(min_row=2,max_row=maxColumn,min_col=2):
+   for j in i:
+       columnData={}
+
+
+
+
 
 ## 连接数据库，然后更新数据
 
 # 获取指定列的数据
-dataMapLists =list(sheet.iter_rows(min_row=2,max_row=2,min_col=2))
 
-print(dataMapLists)
+
 
 
 
