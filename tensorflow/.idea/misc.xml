@@ -3,7 +3,7 @@
   <component name="Black">
     <option name="executionMode" value="BINARY" />
     <option name="pathToExecutable" value="F:\ana\Scripts\black.exe" />
-    <option name="sdkUUID" value="84ace2ac-154c-4cd6-a01e-4584c339eadf" />
+    <option name="sdkName" value="tensorflow" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="tensorflow" project-jdk-type="Python SDK" />
 </project>
