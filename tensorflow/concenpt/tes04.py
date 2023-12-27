@@ -24,7 +24,7 @@ if __name__ == '__main__':
     w2 = tf.compat.v1.Variable(tf.compat.v1.random_normal([3, 1], stddev=1, seed=1))
     a = tf.compat.v1.matmul(x, w1)
     y = tf.compat.v1.matmul(a, w2)
-    #tf.compat.v1.assign(w1,w2,validate_shape=False)
+    #tf.compat.v1.assign(w1,w2,validate_shape=False) 123
     init_op = tf.compat.v1.initialize_all_variables()
     with tf.compat.v1.Session() as sess:
         sess.run(init_op)
