@@ -37,3 +37,4 @@ if __name__ == '__main__':
     y = hidden_layer(x, weight1, biase1, weight2,biase2,"y")
     # test
     print(y)
+    #### 123
