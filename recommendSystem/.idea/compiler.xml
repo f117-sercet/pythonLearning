@@ -6,11 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ContentRecommender" />
-        <module name="DataLoader" />
-        <module name="KafkaStream" />
-        <module name="businessServer" />
+        <module name="MovieRecommend" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="businessServer" target="1.8" />
+      <module name="ContentRecommender" target="1.8" />
+      <module name="DataLoader" target="1.8" />
+      <module name="KafkaStream" target="1.8" />
+      <module name="MovieRecommendSystem" target="1.8" />
+      <module name="recommender" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
