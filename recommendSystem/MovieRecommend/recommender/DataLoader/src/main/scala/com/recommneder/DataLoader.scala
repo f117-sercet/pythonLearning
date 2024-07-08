@@ -1,7 +1,9 @@
 package com.recommneder
 
+import com.mongodb.casbah.MongoClient
+import com.recommneder.DataLoader.storeDataInMongoDB
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{DataFrame, SparkSession}
 
 /**
  * Description： TODO
@@ -38,9 +40,13 @@ case class ESConf(
 object DataLoader {
 
 
-   val MOVIE_DATA_PATH ="F:\\git\\Repository\\gitHub\\pythonLearning\\recommendSystem\\MovieRecommend\\recommender\\DataLoader\\src\\main\\resources\\movies.csv"
-   val RATING_DATA_PATH ="F:\\git\\Repository\\gitHub\\pythonLearning\\recommendSystem\\MovieRecommend\\recommender\\DataLoader\\src\\main\\resources\\rating.csv"
-  val TAG_DATA_PATH ="F:\\git\\Repository\\gitHub\\pythonLearning\\recommendSystem\\MovieRecommend\\recommender\\DataLoader\\src\\main\\resources\\tags.csv"
+    val MOVIE_DATA_PATH ="F:\\git\\Repository\\gitHub\\pythonLearning\\recommendSystem\\MovieRecommend\\recommender\\DataLoader\\src\\main\\resources\\movies.csv"
+    val RATING_DATA_PATH ="F:\\git\\Repository\\gitHub\\pythonLearning\\recommendSystem\\MovieRecommend\\recommender\\DataLoader\\src\\main\\resources\\rating.csv"
+    val TAG_DATA_PATH ="F:\\git\\Repository\\gitHub\\pythonLearning\\recommendSystem\\MovieRecommend\\recommender\\DataLoader\\src\\main\\resources\\tags.csv"
+
+  val MONGODB_MOVIE_COLLECTION="Movie"
+  val MONGODB_RATING_COLLECTION="Rating"
+  val MONGODB_TAG_COLLECTION="Tag"
   def main(args: Array[String]): Unit = {
 
 
@@ -65,21 +71,43 @@ object DataLoader {
 
     // 加载数据
     val movieRDD = spark.sparkContext.textFile(MOVIE_DATA_PATH)
-    val ratingRDD = null
-    val tagRDD = null
+    val movieDF = movieRDD.map(item =>{
+      val attr = item.split("\\^")
+      Movie(attr(0).toInt, attr(1).trim, attr(2).trim, attr(3).trim, attr(4).trim, attr(5).trim, attr(6).trim, attr(7).trim, attr(8).trim, attr(9).trim)
+    }
+    ).toDF()
 
-    // 数据预处理
+    //rating转换为 DF
+    val ratingRDD = spark.sparkContext.textFile(RATING_DATA_PATH)
+    val ratingDF = ratingRDD.map(item => {
+      val attr = item.split(",")
+      Rating(attr(0).toInt, attr(1).toInt, attr(2).toDouble, attr(3).toInt)
+    }).toDF()
+
+    val tagRDD = spark.sparkContext.textFile(TAG_DATA_PATH)
+    val tagDF  = tagRDD.map(item=>{
+      val attr = item.split(",")
+      Tag(attr(0).toInt, attr(1).toInt, attr(2).trim, attr(3).toInt)
+    }).toDF()
+
+  implicit val mongoConfig= MongoDBConf(config("mongo.uri"),config("mongo.db"))
 
     // 将数据保存到MongoDB
-    storeDataInMongoDB();
-    
+    storeDataInMongoDB(movieDF,ratingDF,tagDF);
+
+    // 数据预处理
     // 保存到ES
     storeDataInES();
 
     spark.stop()
   }
 
-  private def storeDataInMongoDB() = ???
+  private def storeDataInMongoDB(movieDF:DataFrame,ratingDF:DataFrame,tagDF:DataFrame)(implicit mongoConfig:MongoDBConf) = {
+
+    //新建MongoDB连接
+    val mongoClient = MongoClient(mongoConfig.uri)
+
+  }
 
   private def storeDataInES() = ???
 
