@@ -5,6 +5,14 @@ import com.mongodb.casbah.commons.MongoDBObject
 import com.recommneder.DataLoader.storeDataInMongoDB
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest
+import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest
+import org.elasticsearch.common.settings.Settings
+import org.elasticsearch.common.transport.InetSocketTransportAddress
+import org.elasticsearch.transport.client.PreBuiltTransportClient
+
+import java.net.InetAddress
 
 /**
  * Description： TODO
@@ -49,6 +57,7 @@ object DataLoader {
   val MONGODB_MOVIE_COLLECTION="Movie"
   val MONGODB_RATING_COLLECTION="Rating"
   val MONGODB_TAG_COLLECTION="Tag"
+  val ES_MOVIE_INDEX ="EsMovieIndex"
   def main(args: Array[String]): Unit = {
 
 
@@ -97,9 +106,23 @@ object DataLoader {
     // 将数据保存到MongoDB
     storeDataInMongoDB(movieDF,ratingDF,tagDF);
 
-    // 数据预处理
+
+    // 数据预处理,把Movie对应的tag信息添加进去,加一列 tag1|tag2|tag3
+    import org.apache.spark.sql.functions._
+    /**
+     * mid,tags
+     * tags:tag1|tag2|tag3
+     */
+    val newTag =tagDF.groupBy($"mid")
+      .agg(concat_ws("|",collect_set($"tag")).as("tags"))
+      .select("mid","tags")
+
+    // 对newTag和movies做join,数据合并在一起,左外连接
+    val movieWithTagsDF = movieDF.join(newTag,Seq("mid"),"left").toDF()
+    implicit val esConfig =ESConfig(config("es.httpHosts"),config("es.transportHosts"),config("es.index"),config("es.cluster.name"))
+
     // 保存到ES
-    //storeDataInES();
+    storeDataInES(movieWithTagsDF);
     spark.stop()
   }
 
@@ -143,7 +166,35 @@ object DataLoader {
 
   }
 
-  //private def storeDataInES() = ???
+  private def storeDataInES(movidDF:DataFrame)(implicit esConfig: ESConfig) = {
+
+    // 新建es配置
+    val settings:Settings = Settings.builder().put("cluster.name",esConfig.clustername).build()
+    // 新建一个es客户端
+    val esClient = new PreBuiltTransportClient(settings)
+
+    val REGEX_HOST_PORT = "(.+):(\\d+)".r
+    esConfig.transportHosts.split(",").foreach{
+      case REGEX_HOST_PORT(host:String,port:String)=>{
+        esClient.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(host),port.toInt))
+      }
+    }
+    // 往里写入数据
+    if(esClient.admin().indices().exists(new IndicesExistsRequest(esConfig.index)).actionGet().isExists){
+
+      // 清除
+      esClient.admin().indices().delete(new DeleteIndexRequest(esConfig.index))
+    }
+    esClient.admin().indices().create(new CreateIndexRequest(esConfig.index))
+    movidDF.write.option("es.nodes",esConfig.httpHosts)
+      .option("es.http.timeout","100m")
+      .option("es.mapping.id","mid")
+      .mode("overwrite")
+      .format("org.elasticsearch.spark.sql")
+      .save(esConfig.index+"/"+ES_MOVIE_INDEX)
+
+
+  }
 
 
 
