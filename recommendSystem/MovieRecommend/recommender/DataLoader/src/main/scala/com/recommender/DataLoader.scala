@@ -1,8 +1,8 @@
-package com.recommneder
+package com.recommender
 
 import com.mongodb.casbah.MongoClient
 import com.mongodb.casbah.commons.MongoDBObject
-import com.recommneder.DataLoader.storeDataInMongoDB
+import com.recommender.DataLoader.storeDataInMongoDB
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
@@ -57,10 +57,8 @@ object DataLoader {
   val MONGODB_MOVIE_COLLECTION="Movie"
   val MONGODB_RATING_COLLECTION="Rating"
   val MONGODB_TAG_COLLECTION="Tag"
-  val ES_MOVIE_INDEX ="EsMovieIndex"
+  val ES_MOVIE_INDEX = "Movie"
   def main(args: Array[String]): Unit = {
-
-
 
     val config = Map("spark.cores"-> "local[*]",
       "mongo.uri"->"mongodb://192.168.10.105:27017/recommender",
