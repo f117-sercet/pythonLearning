@@ -10,11 +10,5 @@
         <module name="StatisticsRecommender" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="businessServer" target="1.8" />
-      <module name="ContentRecommender" target="1.8" />
-      <module name="KafkaStream" target="1.8" />
-      <module name="MovieRecommendSystem" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
