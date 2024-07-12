@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fbea8a59-cef0-475e-98d1-11da6f137ca0" name="Changes" comment="平均热门统计" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Scala Worksheet" />
+        <option value="Package Object" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="version1.1" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/f117-sercet/pythonLearning.git&quot;,
+    &quot;accountId&quot;: &quot;fca54352-4ee3-46fb-8b27-c899f94f2604&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/MovieRecommend/recommender/DataLoader/src/main/resources/movies.csv" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-sql_2.11/2.1.1/spark-sql_2.11-2.1.1-sources.jar!/org/apache/spark/sql/Dataset.scala" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar!/scala/Int.class" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="customMavenHome" value="$PROJECT_DIR$/../../../../../maven/apache-maven-3.6.3-bin/apache-maven-3.6.3" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+        <option name="userSettingsFile" value="F:\maven\apache-maven-3.6.3-bin\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2P3Dmjnrh9SLUjUWQAL2gNSzwMn" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="foldersAlwaysOnTop" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.com.recommneder.DataLoader.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.MovieRecommend [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.recommender [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/git/Repository/gitHub/pythonLearning/recommendSystem/MovieRecommend/recommender/DataLoader/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.6034483&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\git\Repository\gitHub\pythonLearning\recommendSystem\MovieRecommend\recommender\DataLoader\src\main\resources" />
+      <recent name="F:\git\Repository\gitHub\pythonLearning\recommendSystem\MovieRecommend\recommender\DataLoader" />
+      <recent name="F:\git\Repository\gitHub\pythonLearning\recommendSystem\MovieRecommendSystem\recommender\ContentRecommender\src\main\resources" />
+      <recent name="F:\git\Repository\gitHub\pythonLearning\recommendSystem\MovieRecommendSystem\recommender\DataLoader\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\git\Repository\gitHub\pythonLearning\recommendSystem\MovieRecommend\recommender\DataLoader\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.com.recommneder.DataLoader">
+    <configuration name="DataLoader" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="DataLoader" />
+      <module name="DataLoader" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.recommneder.DataLoader" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.recommender.DataLoader" />
+      <module name="DataLoader" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.recommender.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="recommendSystem" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="recommendSystem" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DataLoader" />
+        <item itemvalue="Application.com.recommneder.DataLoader" />
+        <item itemvalue="Application.DataLoader" />
+        <item itemvalue="Application.com.recommneder.DataLoader" />
+        <item itemvalue="Application.DataLoader" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fbea8a59-cef0-475e-98d1-11da6f137ca0" name="Changes" comment="" />
+      <created>1682677032689</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682677032689</updated>
+      <workItem from="1682677033707" duration="828000" />
+      <workItem from="1682758720836" duration="390000" />
+      <workItem from="1683102067379" duration="390000" />
+      <workItem from="1683102555422" duration="37000" />
+      <workItem from="1683102602567" duration="2043000" />
+      <workItem from="1683294809462" duration="2931000" />
+      <workItem from="1683336046210" duration="1394000" />
+      <workItem from="1683366443729" duration="1091000" />
+      <workItem from="1683368402985" duration="655000" />
+      <workItem from="1683713856616" duration="524000" />
+      <workItem from="1683795769539" duration="2069000" />
+      <workItem from="1684491233930" duration="2003000" />
+      <workItem from="1684828839513" duration="1733000" />
+      <workItem from="1684830868270" duration="771000" />
+      <workItem from="1684892093548" duration="3247000" />
+      <workItem from="1686622410250" duration="140000" />
+      <workItem from="1686642046560" duration="715000" />
+      <workItem from="1686706244300" duration="139000" />
+      <workItem from="1686706448119" duration="142000" />
+      <workItem from="1686794265196" duration="303000" />
+      <workItem from="1690191532331" duration="2956000" />
+      <workItem from="1690279196021" duration="724000" />
+      <workItem from="1697773525123" duration="55000" />
+      <workItem from="1699521119200" duration="567000" />
+      <workItem from="1699521753245" duration="11000" />
+      <workItem from="1713781028669" duration="29000" />
+      <workItem from="1719905270580" duration="342000" />
+      <workItem from="1719905626410" duration="2029000" />
+      <workItem from="1719912644462" duration="18000" />
+      <workItem from="1719992764201" duration="4761000" />
+      <workItem from="1720053450588" duration="36000" />
+      <workItem from="1720053545127" duration="707000" />
+      <workItem from="1720054277543" duration="1021000" />
+      <workItem from="1720055312680" duration="1489000" />
+      <workItem from="1720057221045" duration="999000" />
+      <workItem from="1720061425178" duration="122000" />
+      <workItem from="1720061565620" duration="1324000" />
+      <workItem from="1720062957351" duration="979000" />
+      <workItem from="1720077852262" duration="4833000" />
+      <workItem from="1720083082312" duration="3813000" />
+      <workItem from="1720140779420" duration="635000" />
+      <workItem from="1720150834107" duration="245000" />
+      <workItem from="1720168294226" duration="3861000" />
+      <workItem from="1720172529281" duration="3000" />
+      <workItem from="1720400559668" duration="4477000" />
+      <workItem from="1720419698676" duration="4401000" />
+      <workItem from="1720424128902" duration="745000" />
+      <workItem from="1720487915361" duration="1962000" />
+      <workItem from="1720512646043" duration="39000" />
+      <workItem from="1720512695394" duration="6278000" />
+      <workItem from="1720519532401" duration="33000" />
+      <workItem from="1720519593316" duration="19000" />
+      <workItem from="1720573842228" duration="105000" />
+      <workItem from="1720573958549" duration="472000" />
+      <workItem from="1720574443437" duration="203000" />
+      <workItem from="1720574658363" duration="3152000" />
+      <workItem from="1720577969924" duration="3206000" />
+      <workItem from="1720581238330" duration="651000" />
+      <workItem from="1720583742214" duration="851000" />
+      <workItem from="1720593132371" duration="1140000" />
+      <workItem from="1720594285588" duration="1926000" />
+      <workItem from="1720596375670" duration="128000" />
+      <workItem from="1720596515404" duration="81000" />
+      <workItem from="1720596723431" duration="2641000" />
+      <workItem from="1720681778904" duration="1790000" />
+      <workItem from="1720745885759" duration="37000" />
+      <workItem from="1720745952712" duration="340000" />
+      <workItem from="1720746345642" duration="291000" />
+    </task>
+    <task id="LOCAL-00001" summary="重构">
+      <created>1683100196642</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1683100196642</updated>
+    </task>
+    <task id="LOCAL-00002" summary="项目重构">
+      <created>1683205559728</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683205559728</updated>
+    </task>
+    <task id="LOCAL-00003" summary="DataLoader.scala  编写">
+      <created>1683334492190</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683334492190</updated>
+    </task>
+    <task id="LOCAL-00004" summary="DataLoader.scala  编写">
+      <created>1683368976490</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1683368976490</updated>
+    </task>
+    <task id="LOCAL-00005" summary="DataLoader.scala  编写">
+      <created>1683714337963</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1683714337963</updated>
+    </task>
+    <task id="LOCAL-00006" summary="DataLoader.scala  编写">
+      <created>1683796403231</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1683796403231</updated>
+    </task>
+    <task id="LOCAL-00007" summary="DataLoader.scala  编写">
+      <created>1684491971042</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1684491971042</updated>
+    </task>
+    <task id="LOCAL-00008" summary="内容推荐编写">
+      <created>1684830266175</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1684830266175</updated>
+    </task>
+    <task id="LOCAL-00009" summary="内容推荐编写">
+      <created>1684894568161</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1684894568161</updated>
+    </task>
+    <task id="LOCAL-00010" summary="kafka配置">
+      <option name="closed" value="true" />
+      <created>1690194156324</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1690194156324</updated>
+    </task>
+    <task id="LOCAL-00011" summary="kafka及其日志配置">
+      <option name="closed" value="true" />
+      <created>1690279894445</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1690279894445</updated>
+    </task>
+    <task id="LOCAL-00012" summary="重新修改">
+      <option name="closed" value="true" />
+      <created>1719911310834</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1719911310834</updated>
+    </task>
+    <task id="LOCAL-00013" summary="框架搭建">
+      <option name="closed" value="true" />
+      <created>1720001820774</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1720001820774</updated>
+    </task>
+    <task id="LOCAL-00014" summary="框架搭建">
+      <option name="closed" value="true" />
+      <created>1720061649432</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1720061649432</updated>
+    </task>
+    <task id="LOCAL-00015" summary="框架搭建">
+      <option name="closed" value="true" />
+      <created>1720081689443</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1720081689443</updated>
+    </task>
+    <task id="LOCAL-00016" summary="框架搭建">
+      <option name="closed" value="true" />
+      <created>1720082079250</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1720082079250</updated>
+    </task>
+    <task id="LOCAL-00017" summary="引入CSV">
+      <option name="closed" value="true" />
+      <created>1720085620993</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1720085620993</updated>
+    </task>
+    <task id="LOCAL-00018" summary="DataLoader 初步">
+      <option name="closed" value="true" />
+      <created>1720172184018</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1720172184018</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Mongo数据库连接配置">
+      <option name="closed" value="true" />
+      <created>1720408417378</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1720408417378</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Mongo数据库连接配置">
+      <option name="closed" value="true" />
+      <created>1720424827860</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1720424827860</updated>
+    </task>
+    <task id="LOCAL-00021" summary="向ES加载数据">
+      <option name="closed" value="true" />
+      <created>1720518821888</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1720518821888</updated>
+    </task>
+    <task id="LOCAL-00022" summary="数据统计">
+      <option name="closed" value="true" />
+      <created>1720580992925</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1720580992925</updated>
+    </task>
+    <task id="LOCAL-00023" summary="数据统计">
+      <option name="closed" value="true" />
+      <created>1720583807824</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1720583807824</updated>
+    </task>
+    <task id="LOCAL-00024" summary=".iml文件传输">
+      <option name="closed" value="true" />
+      <created>1720583953425</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1720583953425</updated>
+    </task>
+    <task id="LOCAL-00025" summary=".iml文件传输">
+      <option name="closed" value="true" />
+      <created>1720595786734</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1720595786734</updated>
+    </task>
+    <task id="LOCAL-00026" summary="我要试试">
+      <option name="closed" value="true" />
+      <created>1720596166228</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1720596166228</updated>
+    </task>
+    <task id="LOCAL-00027" summary="平均热门统计">
+      <option name="closed" value="true" />
+      <created>1720682907516</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1720682907516</updated>
+    </task>
+    <task id="LOCAL-00028" summary="平均热门统计">
+      <option name="closed" value="true" />
+      <created>1720746370587</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1720746370587</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="version1.1" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="version1.1" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="date">
+                    <value>
+                      <list>
+                        <option value="1682728943272" />
+                        <option value="" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="user">
+                    <value>
+                      <list>
+                        <option value="*" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="重构" />
+    <MESSAGE value="项目重构" />
+    <MESSAGE value="DataLoader.scala  编写" />
+    <MESSAGE value="内容推荐编写" />
+    <MESSAGE value="kafka配置" />
+    <MESSAGE value="kafka及其日志配置" />
+    <MESSAGE value="重新修改" />
+    <MESSAGE value="框架搭建" />
+    <MESSAGE value="引入CSV" />
+    <MESSAGE value="DataLoader 初步" />
+    <MESSAGE value="Mongo数据库连接配置" />
+    <MESSAGE value="向ES加载数据" />
+    <MESSAGE value="数据统计" />
+    <MESSAGE value=".iml文件传输" />
+    <MESSAGE value="我要试试" />
+    <MESSAGE value="平均热门统计" />
+    <option name="LAST_COMMIT_MESSAGE" value="平均热门统计" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/MovieRecommend/recommender/DataLoader/src/main/scala/com/recommender/DataLoader.scala</url>
+          <line>133</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/MovieRecommend/recommender/DataLoader/src/main/scala/com/recommender/DataLoader.scala</url>
+          <line>91</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
