@@ -8,7 +8,7 @@ import java.util.Date
 
 /**
  * Description： TODO
- *
+ *123
  * @author: 段世超
  * @aate: Created in 2024/7/10 9:39
  */
@@ -108,7 +108,28 @@ object StatisticRecommender {
     val averageMoviesDF = spark.sql("select mid,avg(score) as avg from ratings group by mid")
     storeDFInMongoDB(averageMoviesDF,AVERAGE_MOVIES)
     // 4.各类别电影评分Top统计
-
+    // 将电影类别转换成RDD
+    val genresRDD = spark.sparkContext.makeRDD(genres)
+    // 计算Top10
+   val movieWithScore =movieDF.join(averageMoviesDF,Seq("mid"))
+    val genresDF = genresRDD.cartesian(movieWithScore.rdd).filter {
+        case (genres, row) => {
+          row.getAs[String]("genres").toLowerCase.contains(genres.toLowerCase)
+        }
+      }
+      .map {
+        case (genres, row) => {
+          (genres, (row.getAs[Int]("mid"), row.getAs[Double]("avg")))
+        }
+      }.groupByKey()
+      .map {
+        case (genres, items) => {
+          GenersRecommendation(genres, items.toList.sortWith(_._2 > _._2)
+            .take(10).map(item => Recommendation(item._1, item._2)))
+        }
+      }.toDF()
+    // 输出到Mongo
+    storeDFInMongoDB(genresDF,GENRES_TOP_MOVIES)
     spark.stop()
   }
 
