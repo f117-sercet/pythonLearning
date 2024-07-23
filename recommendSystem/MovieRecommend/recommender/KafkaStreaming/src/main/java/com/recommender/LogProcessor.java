@@ -9,7 +9,7 @@ import org.apache.kafka.streams.processor.ProcessorContext;
  * @author: 段世超
  * @aate: Created in 2024/7/23 15:12
  */
-public class LogProcess  implements Processor<byte[],byte[]> {
+public class LogProcessor implements Processor<byte[],byte[]> {
 
 
     private ProcessorContext context;
