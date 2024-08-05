@@ -11,6 +11,7 @@
     <description>MovieRecommend</description>
     <modules>
         <module>recommender</module>
+        <module>businessServer</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
